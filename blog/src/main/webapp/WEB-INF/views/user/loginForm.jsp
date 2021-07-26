@@ -9,11 +9,6 @@
   </div>
 
   <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" class="form-control" placeholder="Enter email" id="email">
-  </div>
-
-  <div class="form-group">
     <label for="password">Password:</label>
     <input type="password" class="form-control" placeholder="Enter password" id="password">
   </div>
@@ -23,7 +18,7 @@
       <input class="form-check-input" type="checkbox"> Remember me
     </label>
   </div>
-  <button type="submit" class="btn btn-primary">회원가입완료</button>
+  <button type="submit" class="btn btn-primary">로그인완료</button>
 </form>
 <%@ include file="../layout/footer.jsp"%>
 
