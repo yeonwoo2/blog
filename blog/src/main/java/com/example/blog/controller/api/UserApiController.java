@@ -6,6 +6,7 @@ import com.example.blog.role.RoleType;
 import com.example.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,24 +19,11 @@ public class UserApiController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private HttpSession httpSession;
-
-    @PostMapping("/api/user")
+    @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user){
         System.out.println("user save 호출됨");
-        user.setRole(RoleType.USER);
         userService.join(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); //자바오브젝트를 json으로 변환해서 리턴
     }
 
-    @PostMapping("/api/user/login")
-    public ResponseDto<Integer> login(@RequestBody User user){
-        User principal = userService.login(user);
-
-        if(principal != null){
-            httpSession.setAttribute("principal",principal); //세션 만들어짐
-        }
-        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); //자바오브젝트를 json으로 변환해서 리턴
-    }
 }

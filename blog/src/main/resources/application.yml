@@ -1,12 +1,14 @@
+#WAS server setting
 server:
   port: 8080
   servlet:
-    context-path: /blog
+    context-path: /
     encoding:
       charset: UTF-8
       enabled: true
       force: true
 
+#View Resolver Setting
 spring:
   mvc:
     view:
@@ -22,7 +24,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
