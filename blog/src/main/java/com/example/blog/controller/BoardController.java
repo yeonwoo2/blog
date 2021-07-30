@@ -26,6 +26,12 @@ public class BoardController {
         return "index"; //viewResolver 작동!! 해당 페이지로 model의 정보를 들고 이동함.
     }
 
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable Integer id, Model model){
+        model.addAttribute("board",boardService.viewDetails(id));
+        return "board/updateForm";
+    }
+
     @GetMapping("/board/{id}")
     public String findById(@PathVariable Integer id, Model model){
         model.addAttribute("board", boardService.viewDetails(id));

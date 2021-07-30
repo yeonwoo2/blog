@@ -28,13 +28,28 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-
+    @Transactional(readOnly = true)
     public Page<Board> postList(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
     public Board viewDetails(Integer id) {
         return boardRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("글 상세보기 실패"));
+    }
+
+    @Transactional
+    public void postDelete(Integer id) {
+         boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void postUpdate(Integer id, Board requestBoard) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("글 찾기 실패"));
+        board.setTitle(requestBoard.getTitle());
+        board.setTitle(requestBoard.getContent());
+        //해당 함수 종료시 트랜잭션 종료 이때 더티체킹 그리고 자동 업데이트 flush
     }
 }

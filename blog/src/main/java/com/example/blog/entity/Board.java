@@ -28,7 +28,7 @@ public class Board {
 
     private int count;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
 
