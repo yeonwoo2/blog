@@ -18,7 +18,7 @@ import java.util.List;
 public class Board {
 
     @Id @GeneratedValue
-    private Integer Id;
+    private Integer id;
 
     @Column(nullable = false, length = 100)
     private String title;
