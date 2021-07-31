@@ -21,7 +21,7 @@ public class User {
     @Id @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(nullable = false, unique = true, length = 150)
     private String username;
 
     @Column(nullable = false, length = 100)
@@ -32,6 +32,8 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private RoleType role;
+
+    private String oauth; //kakao, google
 
     @CreationTimestamp //시간이 자동 입력
     private Timestamp createDate;

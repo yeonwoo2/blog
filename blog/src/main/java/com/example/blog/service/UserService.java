@@ -38,9 +38,32 @@ public class UserService{
         //select를 해서 User오브젝트를 db로 부터 가져오는 이유는 영속화를 하기위해서.
         //영속화된 오브젝트를 변경하면 자동으로 db에 update문을 날려준다.
         User persistence = userRepository.findById(user.getId()).orElseThrow(() -> new IllegalArgumentException("회원찾기 실패"));
-        String rawPassword = user.getPassword();
-        String encPassword = encoder.encode(rawPassword);
-        persistence.setPassword(encPassword);
-        persistence.setEmail(user.getEmail());
+
+        if(persistence.getOauth() == null || persistence.getOauth().equals("")){
+            String rawPassword = user.getPassword();
+            String encPassword = encoder.encode(rawPassword);
+            persistence.setPassword(encPassword);
+        }
+            persistence.setEmail(user.getEmail());
+    }
+
+    @Transactional(readOnly = true)
+    public User findUser(String username) {
+        return userRepository.findByUsername(username).orElseGet(()->new User());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
