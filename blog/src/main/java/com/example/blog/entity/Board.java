@@ -33,7 +33,7 @@ public class Board {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"board"})
     @OrderBy("id desc")
     private List<Reply> replies;

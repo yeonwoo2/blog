@@ -28,9 +28,6 @@ public class BoardService {
     @Autowired
     private ReplyRepository replyRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Transactional
     public void write(Board board, User user){
         board.setCount(0);
@@ -66,5 +63,10 @@ public class BoardService {
     @Transactional
     public void replyWrite(ReplySaveRequestDto replyDto) {
         replyRepository.mSave(replyDto.getUserId(), replyDto.getBoardId(), replyDto.getContent());
+    }
+
+    @Transactional
+    public void deleteReply(Integer replyId) {
+        replyRepository.deleteById(replyId);
     }
 }
