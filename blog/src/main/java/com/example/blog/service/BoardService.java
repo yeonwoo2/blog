@@ -48,7 +48,8 @@ public class BoardService {
 
     @Transactional
     public void postDelete(Integer id) {
-         boardRepository.deleteById(id);
+        replyRepository.mDelete(id);
+        boardRepository.deleteById(id);
     }
 
     @Transactional
