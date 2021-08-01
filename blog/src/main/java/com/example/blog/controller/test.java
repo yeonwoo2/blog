@@ -1,6 +1,8 @@
 package com.example.blog.controller;
 
+import com.example.blog.entity.Board;
 import com.example.blog.entity.User;
+import com.example.blog.repository.BoardRepository;
 import com.example.blog.repository.UserRepository;
 import com.example.blog.role.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,14 @@ public class test {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BoardRepository boardRepository;
+
+    @GetMapping("/test/board/{id}")
+    public Board getBoard(@PathVariable Integer id){
+        return boardRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 유저는 없습니다"));
+    }
 
     @DeleteMapping("/dummy/user/{id}")
     public String delete(@PathVariable("id") User user){

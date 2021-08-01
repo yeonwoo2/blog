@@ -43,8 +43,8 @@ public class UserService{
             String rawPassword = user.getPassword();
             String encPassword = encoder.encode(rawPassword);
             persistence.setPassword(encPassword);
-        }
             persistence.setEmail(user.getEmail());
+        }
     }
 
     @Transactional(readOnly = true)

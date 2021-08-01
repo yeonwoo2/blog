@@ -64,7 +64,6 @@ let index={
         }).done(function(resp){
         //정상이면
             alert("회원수정이 완료되었습니다.");
-            //console.log(resp);
             location.href="/";
         }).fail(function(error){
         //실패면
