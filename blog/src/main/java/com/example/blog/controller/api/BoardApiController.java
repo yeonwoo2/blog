@@ -1,6 +1,7 @@
 package com.example.blog.controller.api;
 
 import com.example.blog.config.auth.PrincipalDetail;
+import com.example.blog.dto.ReplySaveRequestDto;
 import com.example.blog.dto.ResponseDto;
 import com.example.blog.entity.Board;
 import com.example.blog.entity.Reply;
@@ -41,10 +42,8 @@ public class BoardApiController {
     //데이터를 받을 때 컨트롤러에서 dto를 만들어서 받는게 조핟.
     //dto 사용하지 않은 이유는!!
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replySave(@PathVariable Integer boardId,
-                                          @RequestBody Reply reply,
-                                          @AuthenticationPrincipal PrincipalDetail principal){
-        boardService.replyWrite(principal.getUser(), boardId, reply);
+    public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replyDto){
+        boardService.replyWrite(replyDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

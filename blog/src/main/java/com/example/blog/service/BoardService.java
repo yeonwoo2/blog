@@ -1,5 +1,6 @@
 package com.example.blog.service;
 
+import com.example.blog.dto.ReplySaveRequestDto;
 import com.example.blog.entity.Board;
 import com.example.blog.entity.Reply;
 import com.example.blog.entity.User;
@@ -26,6 +27,9 @@ public class BoardService {
 
     @Autowired
     private ReplyRepository replyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public void write(Board board, User user){
@@ -60,15 +64,7 @@ public class BoardService {
     }
 
     @Transactional
-    public void replyWrite(User user, Integer boardId, Reply requestReply) {
-
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(()->new IllegalArgumentException("댓글 쓰기 실패"));
-
-        requestReply.setUser(user);
-        requestReply.setBoard(board);
-
-        replyRepository.save(requestReply);
-
+    public void replyWrite(ReplySaveRequestDto replyDto) {
+        replyRepository.mSave(replyDto.getUserId(), replyDto.getBoardId(), replyDto.getContent());
     }
 }
